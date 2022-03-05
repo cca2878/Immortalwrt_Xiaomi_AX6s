@@ -18,16 +18,22 @@ on:
         description: 'SSH connection to Actions'
         required: false
         default: 'false'
+      need_patch: 
+        description: 'Need Patch?'
+        required: false
+        default: 'true'
+      patch_filename:
+        description: 'Patch Filename'
+        required: false
+        default: 'ax6s.patch'
 
 env:
   REPO_URL: https://github.com/coolsnowwolf/lede
   REPO_BRANCH: master
   FEEDS_CONF: feeds.conf.default
   CONFIG_FILE: AX6S.config
-  PATCH_FILE: ax6s.patch
   DIY_P1_SH: diy-part1.sh
   DIY_P2_SH: diy-part2.sh
-  APPLY_PATCH: true
   UPLOAD_BIN_DIR: false
   UPLOAD_FIRMWARE: true
   UPLOAD_COWTRANSFER: false
@@ -65,10 +71,10 @@ jobs:
         
     - name: Apply patch
       working-directory: /workdir
-      if: (env.APPLY_PATCH == 'true')
+      if: (github.event.inputs.need_patch == 'true' && github.event.inputs.need_patch  != 'false') 
       run: |
         cd openwrt
-        git apply $GITHUB_WORKSPACE/$PATCH_FILE
+        git apply $GITHUB_WORKSPACE/${{ github.event.inputs.patch_filename }}
 
     - name: Load custom feeds
       run: |
