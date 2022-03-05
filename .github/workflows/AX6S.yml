@@ -60,8 +60,14 @@ jobs:
       run: |
         df -hT $PWD
         git clone $REPO_URL -b $REPO_BRANCH openwrt
-        git apply $GITHUB_WORKSPACE/$PATCH_FILE
         ln -sf /workdir/openwrt $GITHUB_WORKSPACE/openwrt
+        
+    - name: Apply patch
+      working-directory: /workdir
+      if: (env.APPLY_PATCH == 'true')
+      run: |
+        cd openwrt
+        git apply $GITHUB_WORKSPACE/$PATCH_FILE
 
     - name: Load custom feeds
       run: |
