@@ -33,6 +33,7 @@ env:
   FEEDS_CONF: feeds.conf.default
   DEPENDENCIES: code.dependencies
   CONFIG_FILE: AX6S.config
+  DIY_INIT_SH: diy-init.sh
   DIY_P1_SH: diy-part1.sh
   DIY_P2_SH: diy-part2.sh
   UPLOAD_BIN_DIR: false
@@ -57,6 +58,7 @@ jobs:
         sudo mkdir -p /workdir
         sudo chown $USER:$GROUPS /workdir
         sudo rm -rf /etc/apt/sources.list.d/* /usr/share/dotnet /usr/local/lib/android /opt/ghc
+        $GITHUB_WORKSPACE/$DIY_INIT_SH
         sudo -E apt-get -qq update
         sudo -E apt-get -qq install $(< $GITHUB_WORKSPACE/code.dependencies)
         sudo -E apt-get -qq autoremove --purge
