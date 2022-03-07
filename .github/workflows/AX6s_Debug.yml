@@ -31,6 +31,7 @@ env:
   REPO_URL: https://github.com/MeIsReallyBa/immortalwrt
   REPO_BRANCH: openwrt-18.06-dev
   FEEDS_CONF: feeds.conf.default
+  DEPENDENCIES: code.dependencies
   CONFIG_FILE: AX6S.config
   DIY_P1_SH: diy-part1.sh
   DIY_P2_SH: diy-part2.sh
@@ -55,7 +56,7 @@ jobs:
       run: |
         sudo rm -rf /etc/apt/sources.list.d/* /usr/share/dotnet /usr/local/lib/android /opt/ghc
         sudo -E apt-get -qq update
-        sudo -E apt-get -qq install $(curl -fsSL git.io/depends-ubuntu-2004)
+        sudo -E apt-get -qq install "$(< /workdir/${{ env.DEPENDENCIES }})"
         sudo -E apt-get -qq autoremove --purge
         sudo -E apt-get -qq clean
         sudo timedatectl set-timezone "$TZ"
