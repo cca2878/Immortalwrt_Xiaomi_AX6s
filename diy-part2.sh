@@ -17,4 +17,4 @@ sed -i '/customized in this file/a net.netfilter.nf_conntrack_max=165535' packag
 
 # Add luci-theme-argon
 git clone -b 18.06 https://github.com/jerrykuku/luci-theme-argon package/lean/luci-theme-argon
-git clone https://github.com/jerrykuku/luci-app-argon-config package/luci-app-argon-config
+# git clone https://github.com/jerrykuku/luci-app-argon-config package/luci-app-argon-config
