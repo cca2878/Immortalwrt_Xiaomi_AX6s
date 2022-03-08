@@ -121,7 +121,7 @@ jobs:
       id: compile
       run: |
         cd openwrt
-        echo -e "Single thread compile"
+        echo -e "$(nproc) thread compile"
         make -j$(nproc) V=s || make -j1 V=s
         echo "::set-output name=status::success"
         grep '^CONFIG_TARGET.*DEVICE.*=y' .config | sed -r 's/.*DEVICE_(.*)=y/\1/' > DEVICE_NAME
