@@ -28,8 +28,8 @@ on:
         default: 'ax6s.patch'
 
 env:
-  REPO_URL: https://github.com/MeIsReallyBa/immortalwrt
-  REPO_BRANCH: openwrt-18.06-dev
+  REPO_URL: https://github.com/CCA2878/immortalwrt-source
+  REPO_BRANCH: MeIsReallyBa-openwrt-18.06-k5.4
   FEEDS_CONF: feeds.conf.default
   DEPENDENCIES: code.dependencies
   CONFIG_FILE: AX6S.config
@@ -122,7 +122,7 @@ jobs:
       run: |
         cd openwrt
         echo -e "Single thread compile"
-        make -j1 V=s
+        make -j$(nproc) V=s || make -j1 V=s
         echo "::set-output name=status::success"
         grep '^CONFIG_TARGET.*DEVICE.*=y' .config | sed -r 's/.*DEVICE_(.*)=y/\1/' > DEVICE_NAME
         [ -s DEVICE_NAME ] && echo "DEVICE_NAME=_$(cat DEVICE_NAME)" >> $GITHUB_ENV
