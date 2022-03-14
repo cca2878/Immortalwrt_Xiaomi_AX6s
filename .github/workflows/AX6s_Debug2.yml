@@ -8,7 +8,7 @@
 # Description: Build OpenWrt using GitHub Actions
 #
 
-name: Redmi_AX6S_Debug_2
+name: Redmi_AX6S_OS
 
 on:
   repository_dispatch:
@@ -32,7 +32,7 @@ env:
   REPO_BRANCH: openwrt-18.06-k5.4
   FEEDS_CONF: feeds.conf.default
   DEPENDENCIES: code.dependencies
-  CONFIG_FILE: AX6S_2.config
+  CONFIG_FILE: AX6S_OS.config
   DIY_INIT_SH: diy-init.sh
   DIY_P1_SH: diy-part1.sh
   DIY_P2_SH: diy-part2.sh
